@@ -14,5 +14,9 @@ class WazArtisanBackgroundProvider extends ServiceProvider
                 ArtisanRunInBackground::class,
             ]);
         }
+        $this->publishes([
+            __DIR__ . '/../config/waz-artisan-background.php' => config_path('waz-artisan-background.php'),
+        ]);
+
     }
 }

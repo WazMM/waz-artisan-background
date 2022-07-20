@@ -14,14 +14,14 @@ class ArtisanRunInBackground extends Command
      *
      * @var string
      */
-    protected $signature = 'run:background';
+    protected $signature = 'run:background {--queue= : Specify Queue} {--connection : Specify Connection}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Run artisan command in background';
 
     /**
      * Execute the console command.
@@ -66,10 +66,18 @@ class ArtisanRunInBackground extends Command
                 $args[$key] = $value;
             }
 //            dd($options, $args);
+            $queue = config('waz-artisan-background.queue') ?? $this->option('queue');
+            $connection = config('waz-artisan-background.connection') ?? $this->option('connection');
+            if (!$queue) {
+                $this->error('Please specify queue');
+            }
+            if (!$connection) {
+                $this->error('Please specify connection');
+            }
             dispatch(function () use ($output, $options, $args) {
 //                $this->call($output, [...$options, ...$args]);
                 Artisan::call($output, [...$options, ...$args]);
-            })->onQueue('default_long')->onConnection('redis-long-running');
+            })->onQueue($queue)->onConnection($connection);
         }
     }
 }
