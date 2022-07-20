@@ -1,0 +1,31 @@
+{
+    "name": "waz/waz-artisan-background",
+    "description": "Run artisan commands in background",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Waz\\WazArtisanBackground\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Waz",
+            "email": "hello.waz99@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Waz\\WazArtisanBackground\\WazArtisanBackgroundProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.1",
+        "illuminate/support": "^9.18",
+        "symfony/console": "^6.0",
+        "illuminate/console": "^9.18"
+    }
+}
